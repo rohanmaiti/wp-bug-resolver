@@ -1,0 +1,50 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tools/widget-controls.sh:*)",
+      "Bash(tools/widget-locate.sh:*)",
+      "Bash(git -C storefront-wp show:*)",
+      "Bash(git -C storefront-wp grep:*)",
+      "Bash(git -C storefront-wp log:*)",
+      "Bash(git -C temp show:*)",
+      "Bash(git -C temp grep:*)",
+      "Bash(git -C temp log:*)",
+      "Bash(grep:*)",
+      "Bash(jq:*)",
+      "mcp__e59bb2f2-2b56-4506-8745-17222a276f11__getAccessibleAtlassianResources",
+      "mcp__e59bb2f2-2b56-4506-8745-17222a276f11__getJiraIssue",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "mcp__claude-in-chrome__read_page",
+      "mcp__claude-in-chrome__get_page_text",
+      "mcp__claude-in-chrome__read_console_messages",
+      "mcp__claude-in-chrome__read_network_requests",
+      "mcp__claude-in-chrome__javascript_tool",
+      "mcp__claude-in-chrome__computer",
+      "mcp__claude-in-chrome__navigate",
+      "mcp__claude-in-chrome__resize_window",
+      "mcp__claude-in-chrome__find",
+      "mcp__claude-in-chrome__tabs_create_mcp",
+      "mcp__claude-in-chrome__tabs_close_mcp",
+      "mcp__e59bb2f2-2b56-4506-8745-17222a276f11__searchJiraIssuesUsingJql",
+      "mcp__e59bb2f2-2b56-4506-8745-17222a276f11__lookupJiraAccountId",
+      "mcp__ccd_session__start_session",
+      "mcp__ccd_session_mgmt__list_sessions",
+      "Edit(knowledge/**)",
+      "Write(knowledge/**)",
+      "Bash(mkdir -p knowledge/batch-runs/:*)",
+      "Bash(ls:*)",
+      "Bash(touch knowledge/batch-runs/.batch-active)",
+      "Bash(rm knowledge/batch-runs/.batch-active)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__e59bb2f2-2b56-4506-8745-17222a276f11__(addCommentToJiraIssue|transitionJiraIssue|editJiraIssue|createJiraIssue)",
+        "hooks": [
+          { "type": "command", "command": "\"$CLAUDE_PROJECT_DIR\"/tools/batch-guard.sh" }
+        ]
+      }
+    ]
+  }
+}
